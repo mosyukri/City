@@ -28,7 +28,12 @@ namespace CityTest.Controllers
         public ActionResult GetProduct()
         {
             var t = getproductlist();
+            foreach(var i in t)
+            {
+                i.unitPrice = Math.Round( decimal.Multiply( i.unitPrice , 0.2m),2);
 
+                i.PricePerUnit = $"AUD {i.unitPrice:0.00}";
+            }
             return Ok(t);
         }
 
@@ -84,6 +89,7 @@ namespace CityTest.Controllers
             public string name { get; set; }
             public string description { get; set; }
             public decimal unitPrice { get; set; }
+            public string PricePerUnit { get; set; }
             public int? maximumQuantity { get; set; }
         }
         private class Price

@@ -45,9 +45,9 @@ export class Catalog extends Component {
             <table className='table table-striped' aria-labelledby="tabelLabel">
                 <thead>
                     <tr>
-                        <th>Name</th>
+                        <th style={{ width:"10%" }}>Name</th>
                         <th>Description</th>
-                        <th style={{ textAlign: 'right' }}>Price</th>
+                        <th style={{ textAlign: 'right', width: "10%"  }}>Price</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -56,7 +56,7 @@ export class Catalog extends Component {
                             {/*<td>{forecast.date}</td>*/}
                             <td>{product.name}</td>
                             <td>{product.description}</td>
-                            <td style={{ textAlign: 'right' }}>{product.unitPrice}</td>
+                            <td style={{ textAlign: 'right' }}>{product.pricePerUnit}</td>
                         </tr>
                     )}
                 </tbody>
