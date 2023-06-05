@@ -5,7 +5,8 @@ using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
+using Swashbuckle.AspNetCore.Swagger;
+using Swashbuckle.AspNetCore.Annotations;
 namespace CityTest
 {
     public class Startup
@@ -22,9 +23,12 @@ namespace CityTest
         {
 
             services.AddControllersWithViews();
-
-            // In production, the React files will be served from this directory
-            services.AddSpaStaticFiles(configuration =>
+            services.AddSwaggerGen(c =>
+            {
+                c.EnableAnnotations();
+            });
+                // In production, the React files will be served from this directory
+                services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/build";
             });
@@ -56,7 +60,12 @@ namespace CityTest
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
             });
-
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "CRM API");
+                //c.OAuthUseBasicAuthenticationWithAccessCodeGrant();
+            });
             app.UseSpa(spa =>
             {
                 spa.Options.SourcePath = "ClientApp";
